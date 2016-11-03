@@ -1,7 +1,8 @@
 # SSPBRNO-Toolkit
 
-*Auto login*
-**Instalace (nutno mít nainstalovaný Tampermonkey)**
-1, Otevřít autologin.user.js<br>
-2, Kliknout na raw<br>
-3, Spustit instalaci</p>
+V tomto balíku jsou scripty pro tampermonkey které vám pomůžou zrychlit práci s webem www.sspbrno.cz
+
+###Instalace (nutno mít nainstalovaný Tampermonkey)
+- Otevřít
+- Kliknout na autologin.user.js
+- Spustit instalaci
