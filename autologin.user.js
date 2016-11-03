@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto Login
-// @namespace    http://tampermonkey.net/
-// @version      0.1
+// @namespace    https://github.com/pajdal97/SSPBRNO-Toolkit
+// @version      1.1
 // @description  Automaticke prihlasi k WIFI
 // @author       Vladimír Paloušek
 // @match        https://wifi.sspbrno.cz/login.html?redirect=*
