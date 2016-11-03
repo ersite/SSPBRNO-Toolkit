@@ -8,15 +8,54 @@
 // @grant        none
 // ==/UserScript==
 
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length,c.length);
+        }
+    }
+    return "";
+}
+
 (function() {
     'use strict';
-
+    
     var username = document.querySelector ('input[name="username"]');
     var password = document.querySelector ('input[name="password"]');
     var submit = document.querySelector ('input[name="Submit"]');
     
-    username.value="<user_name>";
-    password.value="<password>";
+    if(getCookie("log_username") == true && getCookie("log_password") == true) {
+    
+      username.value=getCookie("log_username");
+      password.value=getCookie("log_password");
+    
+    } else {
+    
+      var log_username = prompt("Zadejte uzivatelske jmeno", "");
+      var log_password = prompt("Zadejte heslo:", "");
+      if (log_username != null && log_password != null) {
+        setCookie("log_username", log_username, 365);
+        setCookie("log_password", log_password, 365);
+        
+        username.value=getCookie("log_username");
+        password.value=getCookie("log_password");
+          
+      }
+    
+    }
     
     var clickEvent  = document.createEvent ('MouseEvents');
 
