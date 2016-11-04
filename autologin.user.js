@@ -8,8 +8,6 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
-    'use strict';
     
     function setCookie(cname, cvalue, exdays) {
       var d = new Date();
@@ -62,5 +60,3 @@
     clickEvent.initEvent ('click', true, true);
 
     submit.dispatchEvent (clickEvent);
-
-})();
