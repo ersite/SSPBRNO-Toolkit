@@ -35,7 +35,7 @@
     var password = document.querySelector ('input[name="password"]');
     var submit = document.querySelector ('input[name="Submit"]');
     
-    if(getCookie("log_username") == true && getCookie("log_password") == true) {
+    if(getCookie("log_username") && getCookie("log_password")) {
     
       username.value=getCookie("log_username");
       password.value=getCookie("log_password");
