@@ -12,4 +12,4 @@ Toto rozšíření vás ihned přihlásí při spuštění prohlížeče
 3. Spustit instalaci
 4. Připojit se k wifi a otevřít libovolnou stránku (většinou se otevře sama po připojení k wifi)
 5. Prohlížeč se vás jednou za rok zeptá na přihlašovací údaje
-6. Autologin vás bude přihlašovat sám
+6. Autologin vás bude přihlašovat sám (pokud nebudete přihlášení)
