@@ -4,10 +4,24 @@
 // @version      1.1
 // @description  Automaticke prihlasi k WIFI
 // @author       Vladimír Paloušek
-// @match        https://wifi.sspbrno.cz/login.html?redirect=*
+// @match        https://wifi.sspbrno.cz/login.html*
 // @grant        none
 // ==/UserScript==
 
+    function hostReachable() {
+      var xhr = new ( window.ActiveXObject || XMLHttpRequest )( "Microsoft.XMLHTTP" );
+      var status;
+
+      xhr.open( "HEAD", "//google.com/", false );
+
+      try {
+        xhr.send();
+        return ( xhr.status >= 200 && (xhr.status < 300 || xhr.status === 304) );
+      } catch (error) {
+        return false;
+      }
+
+    }
     
     function setCookie(cname, cvalue, exdays) {
       var d = new Date();
@@ -30,6 +44,8 @@
       }
       return "";
     }
+    
+if(!hostReachable()) {
     
     var username = document.querySelector ('input[name="username"]');
     var password = document.querySelector ('input[name="password"]');
@@ -60,3 +76,5 @@
     clickEvent.initEvent ('click', true, true);
 
     submit.dispatchEvent (clickEvent);
+
+} else {}
