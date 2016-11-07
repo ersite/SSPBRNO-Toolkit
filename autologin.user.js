@@ -7,21 +7,6 @@
 // @match        https://wifi.sspbrno.cz/login.html*
 // @grant        none
 // ==/UserScript==
-
-    function hostReachable() {
-      var xhr = new ( window.ActiveXObject || XMLHttpRequest )( "Microsoft.XMLHTTP" );
-      var status;
-
-      xhr.open( "HEAD", "//google.com/", false );
-
-      try {
-        xhr.send();
-        return ( xhr.status >= 200 && (xhr.status < 300 || xhr.status === 304) );
-      } catch (error) {
-        return false;
-      }
-
-    }
     
     function setCookie(cname, cvalue, exdays) {
       var d = new Date();
@@ -44,37 +29,44 @@
       }
       return "";
     }
-    
-if(!hostReachable()) {
-    
-    var username = document.querySelector ('input[name="username"]');
-    var password = document.querySelector ('input[name="password"]');
-    var submit = document.querySelector ('input[name="Submit"]');
-    
-    if(getCookie("log_username") && getCookie("log_password")) {
-    
-      username.value=getCookie("log_username");
-      password.value=getCookie("log_password");
-    
+
+function loadDoc(url,params) {
+  var result;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && (this.status == 200 || this.status == 307)) {
+        result = true;
     } else {
-    
+        result = false;
+    }
+  };
+  xhttp.open("post", url, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send(params);
+}
+
+    if(getCookie("log_username") && getCookie("log_password")) {
+
+        if(loadDoc("httpS://www.google.com/","")) {
+            window.location = "http://www.google.com/";
+        } else {
+            loadDoc("/login.html","username="+getCookie("log_username")+"&password="+getCookie("log_password")+"&buttonClicked=4&err_flag=0&err_msg=&info_flag=0&info_msg=&redirect_url=");
+            window.location = "http://www.google.com/";
+        }
+
+
+    } else {
+
+      // First load AutoLogin
       var log_username = prompt("Zadejte uzivatelske jmeno", "");
       var log_password = prompt("Zadejte heslo:", "");
       if (log_username != null && log_password != null) {
         setCookie("log_username", log_username, 365);
         setCookie("log_password", log_password, 365);
-        
+
         username.value=getCookie("log_username");
         password.value=getCookie("log_password");
-          
+
       }
-    
+
     }
-    
-    var clickEvent  = document.createEvent ('MouseEvents');
-
-    clickEvent.initEvent ('click', true, true);
-
-    submit.dispatchEvent (clickEvent);
-
-} else {}
