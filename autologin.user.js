@@ -34,7 +34,7 @@ function loadDoc(url,params) {
   var result;
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && (this.status == 200 || this.status == 307)) {
+    if (this.readyState == 4 && this.status == 200) {
         result = true;
     } else {
         result = false;
@@ -43,11 +43,38 @@ function loadDoc(url,params) {
   xhttp.open("post", url, true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send(params);
+  return result;
 }
+function connect() {
+            var log_username = prompt("Zadejte uzivatelske jmeno", "");
+            var log_password = prompt("Zadejte heslo:", "");
+            if (log_username != null && log_password != null) {
+                var login_status = loadDoc("/login.html","username="+log_username+"&password="+log_password+"&buttonClicked=4&err_flag=0&err_msg=&info_flag=0&info_msg=&redirect_url=");
+                setTimeout(function(){
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function() {
+                       setTimeout(function(){
+                        if (this.readyState == 4 && this.status == 200) {
+                            setCookie("log_username", log_username, 365);
+                            setCookie("log_password", log_password, 365);
+                            window.location = "http://www.google.com/";
+                        } else {
+                            setCookie("log_username", log_username, 365);
+                            setCookie("log_password", log_password, 365);
+                            window.location = "http://www.google.com/";
+                            //connect();
+                        }
+                       }, 500);
+                    };
+                    xhttp.open("get", "https://www.sspbrno.cz/", true);
+                    xhttp.send();
+                }, 500);
+            } else {}
 
+        }
     if(getCookie("log_username") && getCookie("log_password")) {
 
-        if(loadDoc("httpS://www.google.com/","")) {
+        if(loadDoc("https://www.sspbrno.cz/","")) {
             window.location = "http://www.google.com/";
         } else {
             loadDoc("/login.html","username="+getCookie("log_username")+"&password="+getCookie("log_password")+"&buttonClicked=4&err_flag=0&err_msg=&info_flag=0&info_msg=&redirect_url=");
@@ -58,15 +85,13 @@ function loadDoc(url,params) {
     } else {
 
       // First load AutoLogin
-      var log_username = prompt("Zadejte uzivatelske jmeno", "");
-      var log_password = prompt("Zadejte heslo:", "");
-      if (log_username != null && log_password != null) {
-        setCookie("log_username", log_username, 365);
-        setCookie("log_password", log_password, 365);
 
-        username.value=getCookie("log_username");
-        password.value=getCookie("log_password");
+        connect();
 
-      }
+
+        //var login_status = loadDoc("/login.html","username="+log_username+"&password="+log_password+"&buttonClicked=4&err_flag=0&err_msg=&info_flag=0&info_msg=&redirect_url=");
+        //setCookie("log_username", log_username, 365);
+        //setCookie("log_password", log_password, 365);
+
 
     }
