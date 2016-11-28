@@ -93,5 +93,4 @@ function connect() {
         //setCookie("log_username", log_username, 365);
         //setCookie("log_password", log_password, 365);
 
-
     }
