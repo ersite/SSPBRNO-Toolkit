@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Auto Login
 // @namespace    https://github.com/pajdal97/SSPBRNO-Toolkit
-// @version      1.2
+// @version      1.3
 // @description  Automaticke prihlasi k WIFI
 // @author       Vladimír Paloušek
 // @match        https://wifi.sspbrno.cz/login.html*
