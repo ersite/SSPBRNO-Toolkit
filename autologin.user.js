@@ -1,11 +1,13 @@
 // ==UserScript==
 // @name         Auto Login
 // @namespace    https://github.com/pajdal97/SSPBRNO-Toolkit
-// @version      1.1
+// @version      1.2
 // @description  Automaticke prihlasi k WIFI
 // @author       Vladimír Paloušek
 // @match        https://wifi.sspbrno.cz/login.html*
 // @grant        none
+// @updateURL	 https://github.com/pajdal97/SSPBRNO-Toolkit/raw/master/autologin.user.js
+// @downloadURL	 https://github.com/pajdal97/SSPBRNO-Toolkit/raw/master/autologin.user.js
 // ==/UserScript==
 function get() {
     var url = window.location.href;
@@ -95,18 +97,7 @@ function connect() {
             loadDoc("/login.html","username="+getCookie("log_username")+"&password="+getCookie("log_password")+"&buttonClicked=4&err_flag=0&err_msg=&info_flag=0&info_msg=&redirect_url=");
             window.location = "http://" + redirectUrl;
         }
-
-
     } else {
-
-      // First load AutoLogin
-
         connect();
-
-
-        //var login_status = loadDoc("/login.html","username="+log_username+"&password="+log_password+"&buttonClicked=4&err_flag=0&err_msg=&info_flag=0&info_msg=&redirect_url=");
-        //setCookie("log_username", log_username, 365);
-        //setCookie("log_password", log_password, 365);
-
     }
 
